@@ -1,52 +1,108 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/tauri";
+// import { invoke } from "@tauri-apps/api/tauri";
+import React, { useState } from 'react';
+import { motion } from "framer-motion"
+import { createTheme, PaletteMode, ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import { Link as RouterLink, LinkProps as RouterLinkProps, Outlet, useLocation } from 'react-router-dom';
+import { LinkProps } from '@mui/material/Link';
+
+import { Drawer } from './components/organisms/Drawer';
+import { AppBar } from './components/organisms/AppBar';
+import {
+  createBrowserRouter,
+  isRouteErrorResponse,
+  RouterProvider,
+  useRouteError,
+} from "react-router-dom";
+import { DashBoardPage, route as DashBoardPageRoute } from './components/pages/DashBoardPage';
+import { TestPage, route as TestPageRoute } from './components/pages/Test';
+
 import "./App.css";
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+const AnimationLayout = () => {
+  const { pathname } = useLocation();
+  return (
+    <PageLayout>
+      <motion.div
+        key={pathname}
+        initial="initial"
+        animate="in"
+        variants={pageVariants}
+        transition={pageTransition}
+      >
+        <Outlet />
+      </motion.div>
+    </PageLayout>
+  );
+};
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }));
-  }
+const router = createBrowserRouter([
+  DashBoardPageRoute,
+  TestPageRoute,
+]);
+
+const LinkBehavior = React.forwardRef<
+  HTMLAnchorElement,
+  Omit<RouterLinkProps, 'to'> & { href: RouterLinkProps['to'] }
+>((props, ref) => {
+  const { href, ...other } = props;
+  return <RouterLink ref={ref} to={href} {...other} />;
+});
+
+const mdTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      } as LinkProps,
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: LinkBehavior,
+      },
+    },
+  },
+});
+
+const drawerWidth: number = 240;
+
+
+function App() {
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
 
   return (
-    <div className="container">
-      <h1>Welcome to Tauri!</h1>
-
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <div className="row">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            greet();
-          }}
-        >
-          <input
-            id="greet-input"
-            onChange={(e) => setName(e.currentTarget.value)}
-            placeholder="Enter a name..."
-          />
-          <button type="submit">Greet</button>
-        </form>
-      </div>
-      <p>{greetMsg}</p>
-    </div>
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={mdTheme}>
+        <Box sx={{ display: 'flex' }}>
+          <AppBar open={open} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth} />
+          <Drawer open={open} toggleDrawer={toggleDrawer} drawerWidth={drawerWidth} />
+          <Box
+            component="main"
+            sx={{
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'light'
+                  ? theme.palette.grey[100]
+                  : theme.palette.grey[900],
+              flexGrow: 1,
+              height: '100vh',
+              overflow: 'auto',
+            }}
+          >
+            <Toolbar />
+            <RouterProvider router={router} />
+          </Box>
+        </Box >
+      </ThemeProvider >
+    </>
   );
 }
 

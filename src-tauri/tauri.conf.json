@@ -16,6 +16,17 @@
       "shell": {
         "all": false,
         "open": true
+      },
+      "window": {
+        "all": false,
+        "close": true,
+        "hide": true,
+        "show": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "startDragging": true
       }
     },
     "bundle": {
@@ -41,7 +52,7 @@
         "fullscreen": false,
         "resizable": true,
         "title": "devlauncher",
-        "width": 800,
+        "width": 1080,
         "height": 600
       }
     ]
