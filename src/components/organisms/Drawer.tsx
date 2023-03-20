@@ -5,8 +5,12 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
 import { FC } from 'react';
+
+import { MenuEntry as DashboardMenuEntry } from '../pages/DashBoardPage';
+import { MenuEntry as ConfigMenuEntry } from '../pages/ConfigurationPage';
+import { MenuEntry as DockerMenuEntry } from '../pages/DockerPage';
+import { MenuEntry as NodeMenuEntry } from '../pages/NodePage';
 
 export const Drawer: FC<{
   drawerWidth: number;
@@ -17,7 +21,6 @@ export const Drawer: FC<{
   open,
   toggleDrawer,
 }) => {
-
     const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
       ({ theme, open }) => ({
         '& .MuiDrawer-paper': {
@@ -60,9 +63,10 @@ export const Drawer: FC<{
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
-          <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          <DashboardMenuEntry />
+          <ConfigMenuEntry />
+          <DockerMenuEntry />
+          <NodeMenuEntry />
         </List>
       </Drawer>
     )

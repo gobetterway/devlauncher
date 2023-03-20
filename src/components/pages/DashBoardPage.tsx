@@ -1,58 +1,57 @@
 
+import { ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Chart from '../../templates/dashboard/Chart';
-import Deposits from '../../templates/dashboard/Deposits';
-import Orders from '../../templates/dashboard/Orders';
-import { ErrorPage } from './ErrorPage';
+import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 
-
-export const DashBoardPage = () => {
-
-  return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 240,
-            }}
-          >
-            <Chart />
-          </Paper>
-        </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 240,
-            }}
-          >
-            <Deposits />
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-            <Orders />
-          </Paper>
-        </Grid>
+export const DashBoardPage = () => (
+  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Grid container spacing={3}>
+      {/* Chart */}
+      <Grid item xs={12} md={8} lg={9}>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
+          }}
+        >
+        </Paper>
       </Grid>
-    </Container>
-  )
-}
+      {/* Recent Deposits */}
+      <Grid item xs={12} md={4} lg={3}>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
+          }}
+        >
+        </Paper>
+      </Grid>
+      {/* Recent Orders */}
+      <Grid item xs={12}>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+        </Paper>
+      </Grid>
+    </Grid>
+  </Container>
+)
 
 export const route =
 {
   path: "/",
-  element: <DashBoardPage />,
-  errorElement: <ErrorPage />
+  element: <DashBoardPage />
 }
+
+export const MenuEntry = () => (
+  <ListItemButton href='/'>
+    <ListItemIcon>
+      <HomeTwoToneIcon />
+    </ListItemIcon>
+    <ListItemText primary="Main" />
+  </ListItemButton>
+)
