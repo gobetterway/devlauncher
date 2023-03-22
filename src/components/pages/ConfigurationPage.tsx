@@ -4,12 +4,19 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useConfig } from '../../App';
 
-export const ConfigurationPage = () => (
-  <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-    <h1>Configuration</h1>
-  </Container>
-)
+export const ConfigurationPage = () => {
+
+  const [config, dispatch] = useConfig()
+
+
+  return (
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <h1>Configuration</h1>
+    </Container>
+  )
+}
 
 export const route =
 {

@@ -17,6 +17,12 @@
         "all": false,
         "open": true
       },
+      "fs": {
+        "all": true,
+        "scope": [
+          "$APPCONFIG/*"
+        ]
+      },
       "window": {
         "all": false,
         "close": true,
@@ -51,7 +57,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "devlauncher",
+        "title": "Betterway Dev Launcher",
         "width": 1080,
         "height": 600
       }
