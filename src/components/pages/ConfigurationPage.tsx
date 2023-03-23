@@ -41,7 +41,7 @@ export const ConfigurationPage = () => {
             height: 240,
           }}
         >
-          <h1>Configuration</h1>
+          <h1>Configuration Page</h1>
           <Button onClick={() => selectBaseDirEmplacement()}>Select Folder</Button> {config.baseDir}
         </Paper>
       </Grid>
