@@ -69,26 +69,26 @@ function configReducer(state: ConfigState, action: ActionType) {
 
   switch (action[ACTION_TYPE]) {
     case 'loadConf': {
-      out = action[ACTION_DATA]
+      out = action[ACTION_DATA] as ConfigState
       break;
     }
     case 'setBaseDir': {
-      out = { ...state, ...{ baseDir: action[ACTION_DATA] } }
+      out = { ...state, ...{ baseDir: action[ACTION_DATA] as string } }
       save(out)
       break;
     }
     case 'setNodeCommand': {
-      out = { ...state, ...{ nodeCommand: action[ACTION_DATA] } }
+      out = { ...state, ...{ nodeCommand: action[ACTION_DATA] as string } }
       save(out)
       break;
     }
     case 'setServicesDir': {
-      out = { ...state, ...{ serviceDir: action[ACTION_DATA] } }
+      out = { ...state, ...{ serviceDir: action[ACTION_DATA] as string } }
       save(out)
       break;
     }
     case 'setDockerDir': {
-      out = { ...state, ...{ dockerDir: action[ACTION_DATA] } }
+      out = { ...state, ...{ dockerDir: action[ACTION_DATA] as string } }
       save(out)
       break;
     }
